@@ -17,7 +17,27 @@ var order1 = {
 		}
 	]
 };
-function addNewOrder() {
+var order2 = {
+	"table_id": 3,
+	"products": [{
+      "product":"PIZZA",
+      "quantity":3,
+      "price":"$1000"
+    },
+		{
+			"product": "HOTDOG",
+			"quantity": 1,
+			"price": "$3000"
+		},
+    {
+			"product": "COKE",
+			"quantity": 4,
+			"price": "$1300"
+		}
+	]
+};
+
+function addNewOrder(orden) {
 	
 	var tope = new Array();
 	tope.push("Product");
@@ -26,9 +46,16 @@ function addNewOrder() {
  
     var table = document.createElement("TABLE");
     table.border = "1";
+    table.setAttribute("id","Table"+orden.table_id);
  
     var columnCount = 3;
- 
+        
+    var row = table.insertRow(-1);
+    var headerTable = document.createElement("TH");
+    headerTable.setAttribute("colspan","3");
+    headerTable.innerHTML = "Table "+orden.table_id;
+    row.appendChild(headerTable);
+
     var row = table.insertRow(-1);
     for (var i = 0; i < columnCount; i++) {
         var headerCell = document.createElement("TH");
@@ -36,17 +63,27 @@ function addNewOrder() {
         row.appendChild(headerCell);
     }
  
-    for (var i = 0; i < order1.products.length; i++) {
+    for (var i = 0; i < orden.products.length; i++) {
         row = table.insertRow(-1);
         var cell = row.insertCell(-1);
-        cell.innerHTML = order1.products[i].product;
+        cell.innerHTML = orden.products[i].product;
 		var cell = row.insertCell(-1);
-        cell.innerHTML = order1.products[i].quantity;
+        cell.innerHTML = orden.products[i].quantity;
 		var cell = row.insertCell(-1);
-        cell.innerHTML = order1.products[i].price;
-        }
+        cell.innerHTML = orden.products[i].price;
+    }
  
-    var dvTable = document.getElementById("dvTable");
-    dvTable.innerHTML = "";
+    var dvTable = document.getElementById("dvTables");
+    dvTable.appendChild(document.createElement("BR"));
     dvTable.appendChild(table);
+}
+
+function loadOrders(){
+        addNewOrder(order1);
+        addNewOrder(order2);        
+}
+
+function removeOrderById(id){
+    var _table = document.getElementById("Table"+id);
+    if(_table) _table.parentNode.removeChild(_table);
 }
