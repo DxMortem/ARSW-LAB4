@@ -53,10 +53,17 @@ Create a simple front end using the following frameworks:
     Use the following method to start: https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById
 5. Try your add order function iterating the list created on 2. and make sure the data is loaded into the table from the JavaScript code.
 
+6. Create a function that loads the orders (creates the HTML tables) from a mocked list of orders in your JavaScript file.
+Once this function is working call it from the body tag in order to invoke this function everytime the page is loaded:
+
+```html
+	<body onload="loadOrders();">
+```
+
 # Part 3: Consume the REST API and connect it with the FrontEnd
 1. Create a function that calls the API Endpoint that retrieves the orders list using the [Axios API library](https://github.com/axios/axios)
 2. Implement the callback when the orders list is return succesfully that uses the *OrderController.js* functions.
-3. Add a script that invokes the *loadOrdersList* funtcion everytime the page is loaded
+3. Modify the loadOrders function so it actually makes a call to the Orders API and loads the orders from the server.
 4. Implement the callback when the request fails that shows a dialog to user saying that "There is a problem with our servers. We apologize for the inconvince, please try again later" 
 5. In order to test your application do the following:
     - Add your JavaScript file to the SpringBoot project under the resources/static/js folder (create the folder if it does not exist)
