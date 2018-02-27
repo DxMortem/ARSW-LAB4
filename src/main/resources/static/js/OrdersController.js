@@ -17,25 +17,6 @@ var order1 = {
 		}
 	]
 };
-var order2 = {
-	"table_id": 3,
-	"products": [{
-      "product":"PIZZA",
-      "quantity":3,
-      "price":"$1000"
-    },
-		{
-			"product": "HOTDOG",
-			"quantity": 1,
-			"price": "$3000"
-		},
-    {
-			"product": "COKE",
-			"quantity": 4,
-			"price": "$1300"
-		}
-	]
-};
 
 function addNewOrder(orden) {
 	
@@ -79,8 +60,16 @@ function addNewOrder(orden) {
 }
 
 function loadOrders(){
-        addNewOrder(order1);
-        addNewOrder(order2);        
+	axios.get("/orders")
+	.then(function (response){
+		var orders = response.data;
+		for(var i=0;i<orders.length;i++){
+				addNewOrder(orders[i]);
+		}
+	})
+	.catch(function (error){
+		console.log("There is a problem with our servers. We apologize for the inconvince, please try again later");
+	})		        
 }
 
 function removeOrderById(id){
