@@ -60,6 +60,7 @@ function addNewOrder(orden) {
 }
 
 function loadOrders(){
+	addNewOrder(order1);
 	axios.get("/orders")
 	.then(function (response){
 		var orders = response.data;
@@ -69,7 +70,7 @@ function loadOrders(){
 	})
 	.catch(function (error){
 		console.log("There is a problem with our servers. We apologize for the inconvince, please try again later");
-	})		        
+	});		        
 }
 
 function removeOrderById(id){
